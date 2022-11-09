@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Webpage</title>
+  <meta name="description" content="This is a demo webpage for practice reasons.">
+  <meta name="author" content="B.G">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<style>
+    :root {
+  /*VARIABLES*/
+  
+  /*COLORS*/
+  --nav-clr: rgba(240,240,240,1);
+  --sub-menu-clr: rgba(250,250,250,1);
+  --menu-icon-clr: rgba(70,70,70,1);
+  --menu-text-clr: rgb(0,0,0);
+  
+  --shadow-dark: 100,100,100;
+  --shadow-normal: 170,170,170;
+  --shadow-light: 200,200,200;
+  
+  /*OPACITY*/
+  --opacity-light: 0.4;
+  
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  
+}
+
+html {
+  scroll-behavior: smooth; 
+}
+
+header {
+  display: grid; 
+  grid: 1fr / 1fr auto 1fr;
+  position: sticky;
+  top: 0;
+  background: var(--nav-clr);
+  box-shadow: 0 2px 5px rgba(var(--shadow-normal),1);
+}
+
+/*NAV STYLING*/
+
+nav {
+  grid-column: -1;
+  position: relative; 
+  width: 100%;
+  height: 3rem;
+}
+
+.toggle-bar {
+ display: none;
+}
+
+.menu-icon {
+  display: flex;
+  height: 100%;
+}
+
+.menu-icon span {
+  position: absolute;
+  right: 5vw;
+  align-self: center; 
+  color: var(--menu-icon-clr);
+  font: 900 1.7rem sans-serif;
+  text-shadow: 1px 1px 1px gray;
+  cursor: pointer; 
+}
+
+nav ul {
+  background: var(--nav-clr);
+  border-top: 2px solid gray;
+  border-image: linear-gradient(90deg, maroon, rebeccapurple) 30;
+  list-style-type: none;
+  height: auto;
+  width: 50vw;
+  box-shadow: 0 2px 5px rgba(var(--shadow-normal),1); 
+  border-radius: 0 0 0 0.5rem;
+}
+
+nav a {
+text-decoration: none;
+color: var(--menu-text-clr);
+font: 0.8rem Verdana,sans-serif;
+text-transform: uppercase;
+opacity: 0;
+/*transition: opacity 50ms ease-out;  */ 
+}
+
+nav li:hover > a {
+  background: linear-gradient(90deg, maroon, rebeccapurple);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+
+.toggle-bar:checked + ul a {
+  opacity: 1;
+  transition: opacity 250ms ease-in-out 50ms;
+}
+
+/*.toggle-bar:not(checked) + ul a {
+  transition: opacity 50ms ease-out; 
+}*/
+
+nav li {
+  padding: 2em;
+  position: relative;
+  display: flex;
+  justify-content: center; 
+  min-width: 100%;
+  
+}
+
+nav li:hover:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  bottom: 0.5rem;
+  width: 50vw;
+  height: 2px;
+  background: linear-gradient(90deg, maroon, rebeccapurple);
+}
+
+nav li:not(:first-child):hover::before {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  width: 50vw;
+  height: 2px;
+  background: linear-gradient(90deg, maroon, rebeccapurple);
+}
+
+.menu-icon span:hover {
+  background: linear-gradient(90deg, maroon, rebeccapurple);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+} 
+
+.toggle-bar:not(:checked) + ul {
+  transform: scale(0,1);
+  transition: transform 250ms ease-in-out;
+  transform-origin: right;
+}
+
+.toggle-bar:checked + ul {
+  transform: scale(1,1);
+  transform-origin: right;
+  transition: transform 250ms ease-in-out;
+}
+ /* animation: slide-in 750ms ease-in-out;
+}
+
+@keyframes slide-in {
+  0% {
+   transform: translateX(50vw);
+  } 
+  100% {
+    transform: translateX(0);
+  }
+}  */
+
+div.logo {
+  font: 900 18px sans-serif;
+  margin-left: 5vw;
+  align-self: center;
+  background: linear-gradient(90deg, maroon, rebeccapurple);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; 
+  animation: logo-anime 10s alternate infinite;
+}
+
+@keyframes logo-anime {
+  from {background-position: 0 0;}
+  to {background-position: 100% 100%;}
+}
+
+/*MAIN STYLING*/
+
+main {
+  margin: 7vh 5vw; 
+  display: grid; 
+}
+
+/*main article {
+  display: grid;
+}*/
+
+main h3, 
+section h4 {
+  text-shadow: 2px 2px 2px rgba(var(--shadow-light),1); 
+  font: 600 1rem sans-serif; 
+}
+
+main h3 {
+  margin-top: 4vh;
+}
+
+article p a {
+  text-decoration: none; 
+}
+
+main article p {
+  margin: 1rem 0.3rem;
+}
+
+article p a:link,
+article p a:visited,
+article p a:hover {
+  color: rgba(50,120,150,1);
+}
+
+article p a:hover, 
+article p a:focus {
+  text-decoration: underline;
+}
+
+main article figure {
+  /*place-self: center; */
+  margin-right: auto;
+  margin-left: auto;
+}
+
+article > figure > img, 
+section > figure > img {
+  max-width: 100%;
+  border-radius: 0.2rem; 
+  box-shadow: 4px 4px 5px rgba(var(--shadow-normal),1); 
+}
+
+article > figure > figcaption {
+font: oblique 0.8rem serif;  
+text-align: center;
+margin-top: 0.5rem;
+}
+
+section {
+ /* place-self: center;  */
+  margin-right: auto;
+  margin-left: auto;
+  border: 1rem solid white;
+  padding: 1vh; 
+  width: 80vw;
+  border-radius: 0.3rem; 
+  box-shadow: 0 0 1rem rgba(var(--shadow-normal),1);
+}
+
+section h4 {
+  margin-bottom: 0.7rem; 
+}
+
+section > figure {
+ overflow: auto;
+ display: flex; 
+ gap: 5vw; 
+ scroll-snap-type: x mandatory; 
+ scrollbar-width: thin;
+ scrollbar-color: dark;
+}
+
+section img {
+  scroll-snap-align: center; 
+  margin: 1vh 0;
+  transition: opacity 1000ms ease-in-out;
+  object-fit: cover; 
+}
+
+section img:hover {
+  opacity: 0.7;
+}
+
+footer {
+  display: grid; 
+  place-items: center; 
+  background: gray; 
+  height: 5vh; 
+}
+
+footer address {
+  display: none; 
+}
+
+/*MEDIA QUERIES*/
+
+@media screen and (min-width: 420px) {
+  
+    header {
+    height: 20vh;
+    grid: 1fr min(3rem, 8vw) / repeat(7, 1fr);
+    background: unset;
+    box-shadow: unset; 
+    position: relative; 
+  }
+  
+  header > div.logo {
+    grid-column: 4 / 5;
+    place-self: center;
+    margin-left: unset;
+    font: 600 clamp(2rem, 3vh, 3rem) sans-serif;
+  }
+  
+  header > nav {
+    all: unset;
+    grid-area: 2 / 1 / 3 / -1;
+    background: var(--nav-clr);
+    box-shadow: 0 2px 5px rgba(var(--shadow-normal),1), 0 -1px 10px rgba(var(--shadow-light));
+  }
+
+   .menu-icon {
+  display: none;
+ }
+ 
+  header > nav > ul {
+  all: unset;
+  display: flex;
+  height: 100%;
+  align-items: space-between;
+ }
+ 
+  nav > ul > li > a {
+    opacity: 1;
+  }
+ 
+ /*MAIN STYLING*/
+  
+  main article h3 {
+    font-size: clamp(1rem, 5vw, 1.2rem);
+  } 
+  
+  main article figure {
+    width: 40vw;
+    padding-top: 2vh;
+    padding-bottom: 1vh;
+  }
+
+  main article figure:first-of-type {
+    float: left;
+    margin-right: 2vw;
+  }
+  
+  main article figure:nth-of-type(2) {
+    float: right; 
+    margin-left: 2vw;
+  }
+  
+  /*IMAGE GALLERY*/
+  
+  main section {
+    max-width: 90vw;
+  }
+  
+  section > figure {
+    all: unset;
+    cursor: pointer; 
+    margin-right: auto;
+    margin-left: auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center; 
+    gap: 2vw;
+  }
+  
+  section > figure > img {
+  width: max(16vw, 10rem);
+  }
+  
+ /*FOOTER*/
+  footer {
+   height: 20vh;
+   padding-top: 4vh;
+   display: flex;
+   justify-content: space-evenly;
+    align-items: start;
+  } 
+  
+  footer address {
+    display: block;
+  }
+  
+  footer div {
+    align-self: center;
+  }
+ }
+
+@media screen and (min-width: 800px) {
+  body {
+    display: grid; 
+    grid: 25vh 1fr 20vh / auto 2fr 1.5fr auto; 
+  }
+  
+  header {
+    grid-area: 1 / 1 / 2 / -1;
+    height: auto;
+  }
+  
+  footer {
+    grid-area: -2 / 1 / -1 / -1;
+  }
+  
+   main {
+    display: grid;
+    grid-template-columns: 2fr 1fr; 
+    gap: 5vw;
+  } 
+  
+    section {
+    margin-top: 11vh;
+    width: 40vw;
+    
+  }
+}
+  </style>
+  
+<body>
+  <header>
+    <div class="logo">Nature trap me.</div>
+    <nav>
+      <label for="toggle-bar" class="menu-icon" title="Open/Close Menu Bar"><span>&#9776</span></label>
+      <input type="checkbox" id="toggle-bar" class="toggle-bar"></input>
+      <ul>
+        <li><a href="#" target="_blank" title="Click here for Link">Link 1</a></li>
+        <li><a href="#" target="_blank" title="Click here for Link">Link 2</a></li>
+        <li><a href="#" target="_blank" title="Click here for Link">Link 3</a></li>
+        <li><a href="#" target="_blank" title="Click here for Link">Link 4</a></li>
+        <li><a href="#" target="_blank" title="Click here for Link">Link 5</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <article>
+      <h3>Gift of god</h3>
+      <p>I’m a self-professed mountain boy/mountain lover/
+        mountain climber. Except that here’s the thing:
+        I don’t even live in the mountains – not even close!
+        Years ago I traded in my mountain lifestyle for a new and
+        exciting opportunity on the other side of the country – and I wouldn’t
+        change that decision for the world! But I must confess what I can’t
+        shake…the mountains stole my heart.<br />here's why:
+        <a href="#gallery" title="Go to Image Gallery">image gallery</a>.
+      </p>
+      <figure>
+        <img src="https://purewows3.imgix.net/images/articles/2020_03/calming-pictures-cat1.jpg?auto=format,compress&cs=strip" alt="Figure 1">
+        <figcaption>The mountains are good for the soul</figcaption>
+      </figure>
+      <p> I have never in my life claimed to be an adventurer or outdoors lover<br>
+        -until I started hiking in the mountains. With the lovely, lush green forests
+        and foothills,
+        the tantalizing teal lakes hidden away like a secret prize waiting to be found,
+        and those stunning sky-high jagged peaks,it was love at first sight. But more than that,
+        hiking
+        in the mountains became an immediate passion because of the way it made me feel. I was able to just be the real
+        me and connect with the version of myself that felt the most authentic and true.</p>
+
+      <p>Spending time out in the mountains really takes things back to basics.
+        There is no wifi, no cell service, no social media
+        – money doesn’t matter out in the woods or up on a mountain top.
+        It’s just you and mother nature.</p>
+      <figure>
+        <img src="https://purewows3.imgix.net/images/articles/2020_03/calming-pictures-9.jpg?auto=format,compress&cs=strip" alt="Figure 2">
+        <figcaption>They dsconnect us to reconnect us.</figcaption>
+      </figure>
+
+      <p>Being surrounded by the mountains has a powerful effecton
+        something deeper.It’s as if being amidst something greater than ourselves, changes our
+        perspective and insight on life and the things that really matter.>Somehow without
+        trying, you are able to confront your demons, re-evaluate your problems or your goals
+        or your desires –you are able to widen your perspective and reflect on ‘the big
+        picture’.</p>
+
+      <p>Call me crazy or cliche or what ever..but there is no denying it.
+        Maybe it’s that dose of fresh mountain air, the exercise or the litres
+        of water I drink when I’m hiking,but I swear to you that after a visit to the mountains I feel enormously better.It’s as if there is an energy source in those summits that you can tap into and feed off of.
+        Getting out there literally fuels you and rebalances you; you will notably feel more calm and happy, and less irritable or anxious.
+        There was never a time that I left the mountains without feeling refreshed, happy and inspired
+        – ready to take on anything that came my way.</p>
+    </article>
+    <section id="gallery" class="gallery">
+      <h4>Image Gallery</h4>
+      <figure>
+        <img src="https://purewows3.imgix.net/images/articles/2020_03/calming-pictures-1.jpg?auto=format,compress&cs=strip" alt="Picture">
+        <img src="https://purewows3.imgix.net/images/articles/2020_03/calming-pictures-8.jpg?auto=format,compress&cs=strip" alt="Picture">
+        <img src="https://purewows3.imgix.net/images/articles/2020_03/calming-pictures-12.jpg?auto=format,compress&cs=strip" alt="Picture">
+        <img src="https://purewows3.imgix.net/images/articles/2020_03/calming-pictures-6.jpg?auto=format,compress&cs=strip" alt="Picture">
+        <img src="https://purewows3.imgix.net/images/articles/2020_03/calming-pictures-5.jpg?auto=format,compress&cs=strip" alt="Picture">
+        <img src="https://purewows3.imgix.net/images/articles/2020_03/calming-pictures-7.jpg?auto=format,compress&cs=strip" alt="Picture">
+        <img src="https://purewows3.imgix.net/images/articles/2020_03/calming-pictures-4.jpg?auto=format,compress&cs=strip" alt="Picture">
+        <img src="https://purewows3.imgix.net/images/articles/2020_03/calming-pictures-2.jpg?auto=format,compress&cs=strip" alt="Picture">
+      </figure>
+    </section>
+  </main>
+  <footer>
+    <div>Copyright 2022</div>
+    <address>
+      <u>Address</u>:<br>
+      shashank rajput, <br>
+      kanpur, <br>
+      uttar-pradesh,india.
+    </address>
+    <address>
+      <u>Mail</u>:<br>
+      <a href="3492ssr@gmail.com">3492ssr@gmail.com</a>
+    </address>
+  </footer>
+</body>
+
+</html>
